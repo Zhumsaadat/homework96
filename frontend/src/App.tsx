@@ -5,6 +5,7 @@ import Register from './features/Users/Register.tsx';
 import Login from './features/Users/Login.tsx';
 import AppToolbar from './components/AppToolbar';
 import Cocktails from './features/Cocktails/Cocktails.tsx';
+import MyCocktails from './features/Cocktails/MyCocktails';
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
             </header>
             <Routes>
                 <Route path="/" element={<Cocktails />} />
+                <Route path="/myCocktails" element={<MyCocktails />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="*" element={<Alert severity="error">Not found!</Alert>} />

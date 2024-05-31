@@ -21,6 +21,7 @@ const Cocktails = () => {
     const isLoading = useAppSelector(selectIsLoading);
     const user = useAppSelector(selectUser);
 
+
     useEffect(() => {
         const fetchUrl = async () => {
             await dispatch(getCocktails());
