@@ -1,6 +1,6 @@
 import axiosApi from '../../axiosApi.ts';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {CocktailTypes} from '../../types';
+import { CocktailTypes, NewCocktails } from '../../types';
 
 
 export const getCocktails = createAsyncThunk<CocktailTypes[]>(
@@ -47,6 +47,27 @@ export const deleteCocktail = createAsyncThunk<void, string>(
     async (id) => {
         try {
             await axiosApi.delete('/cocktails/' + id);
+        } catch (err) {
+            throw err;
+        }
+    },
+);
+
+export const addCocktail = createAsyncThunk<void, NewCocktails>(
+    'add/artists',
+    async (data) => {
+        try {
+            const formData = new FormData();
+
+            formData.append('name', data.name);
+            formData.append('recipe', data.recipe);
+            formData.append('ingredients', JSON.stringify(data.ingredients));
+
+            if (data.image) {
+                formData.append('image', data.image);
+            }
+
+            await axiosApi.post('/cocktails', formData);
         } catch (err) {
             throw err;
         }

@@ -34,6 +34,10 @@ const UserMenu: React.FC<Props> = ({user}) => {
         navigate('/myCocktails');
     };
 
+    const toAddCocktail = () => {
+        navigate('/newCocktail');
+    };
+
     const ImageCardMedia = styled(CardMedia)({
         height: 0,
         padding: '22px',
@@ -49,6 +53,7 @@ const UserMenu: React.FC<Props> = ({user}) => {
             {user.avatar ? <ImageCardMedia image={`${apiUrl}/${user.avatar}`}/> : <Avatar sx={{ml: 2}} />}
             <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose} keepMounted>
                 <MenuItem onClick={toMyCocktails}>My cocktails</MenuItem>
+                <MenuItem onClick={toAddCocktail}>Add cocktail</MenuItem>
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
         </>
