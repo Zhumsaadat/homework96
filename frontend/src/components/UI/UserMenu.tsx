@@ -42,7 +42,7 @@ const UserMenu: React.FC<Props> = ({user}) => {
             <Button color="inherit" onClick={handleClick}>
                 Hello, {user.displayName}!
             </Button>
-            {user.image ? <ImageCardMedia image={`${apiUrl}/${user.image}`}/> : <Avatar sx={{ml: 2}} />}
+            {user.avatar ? <ImageCardMedia image={`${apiUrl}/${user.avatar}`}/> : <Avatar sx={{ml: 2}} />}
             <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose} keepMounted>
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>

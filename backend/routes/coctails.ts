@@ -39,7 +39,7 @@ cocktailsRouter.post('/', auth, imageUpload.single('image'), async (req: Request
             name: req.body.name,
             recipe: req.body.recipe,
             isPublished: req.body.isPublished,
-            ingredients: req.body.ingredients,
+            ingredients: JSON.parse(req.body.ingredients),
             image: req.file ? req.file.filename : null,
         });
 

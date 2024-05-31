@@ -16,7 +16,7 @@ export interface UserTypes {
     token: string;
     role: string;
     displayName: string;
-    image: string | null;
+    avatar: string | null;
 }
 
 export interface ValidationError {
@@ -38,4 +38,20 @@ export interface RegisterResponse {
 
 export interface GlobalError {
     error: string;
+}
+
+export interface CocktailTypes {
+    _id: string
+    user: string;
+    name: string;
+    image: string | null;
+    recipe: string;
+    isPublished: boolean;
+    ingredients: [
+        {
+            _id: string;
+            ingredientName: string;
+            quantity: string;
+        }
+    ]
 }
