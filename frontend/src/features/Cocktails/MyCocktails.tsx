@@ -1,6 +1,6 @@
 import {selectUser} from '../Users/usersSlice.ts';
 import {useEffect} from 'react';
-import {Card, CardContent, CardMedia, CircularProgress, Grid, styled, Typography} from '@mui/material';
+import { Alert, Card, CardContent, CardMedia, CircularProgress, Grid, styled, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../../App/hooks';
 import { selectMyCocktails, selectMyIsLoading } from './coctailsSlice';
 import { getMyCocktails } from './coctailsThunks';
@@ -14,12 +14,13 @@ const MyCocktails = () => {
 
     useEffect(() => {
         const fetchUrl = async () => {
-            if (user) await dispatch(getMyCocktails(user._id));
-
+            if (user) {
+                await dispatch(getMyCocktails(user._id));
+            }
         };
 
         void fetchUrl();
-    }, [dispatch]);
+    }, [dispatch, user]);
 
     const ImageCardMedia = styled(CardMedia)({
         height: 0,
@@ -49,9 +50,9 @@ const MyCocktails = () => {
                                 <Typography gutterBottom component="div">
                                     Recipe: {elem.recipe}
                                 </Typography>
-                                <Typography gutterBottom component="div">
+                                <Alert severity="info">
                                     Статус: {!elem.isPublished ? 'ваш коктейль находится на рассмотрении модератора' : 'опубликовано'}
-                                </Typography>
+                                </Alert>
                             </CardContent>
                         </Card>
                     </Grid>

@@ -1,5 +1,4 @@
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
@@ -7,6 +6,7 @@ import {addInterceptors} from './axiosApi.ts';
 import {GoogleOAuthProvider} from '@react-oauth/google';
 import { GOOGLE_CLIENT_ID } from './consttants';
 import { persistor, store } from '../App/store';
+import App from './App';
 
 addInterceptors(store);
 

@@ -1,5 +1,6 @@
 import {useEffect} from 'react';
 import {
+    Alert,
     Button,
     Card,
     CardContent,
@@ -25,6 +26,7 @@ const Cocktails = () => {
     useEffect(() => {
         const fetchUrl = async () => {
             await dispatch(getCocktails());
+            console.log(cocktails)
         };
         void fetchUrl();
     }, [dispatch]);
@@ -48,7 +50,7 @@ const Cocktails = () => {
     return (
         <>
             <Grid container spacing={3}>
-                {!isLoading ? cocktails.map((elem) => (
+                {!isLoading ? (cocktails.length !== 0? cocktails.map((elem) => (
                     <Grid item xs={6} key={elem._id}>
                         {user && user.role === 'admin' ? <Card>
                             {elem.image ? <ImageCardMedia image={`${apiUrl}/${elem.image}`}/> : ''}
@@ -98,7 +100,7 @@ const Cocktails = () => {
                             </CardContent>
                         </Card> : ''}
                     </Grid>
-                )) : <CircularProgress/>}
+                )): <Grid item xs={12}><Alert severity="info"> Cocktails exist</Alert></Grid>) : <CircularProgress/>}
             </Grid>
         </>
     );

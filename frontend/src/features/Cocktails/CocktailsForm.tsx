@@ -1,10 +1,10 @@
 import {useNavigate} from 'react-router-dom';
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import {NewCocktails} from '../../types';
 import {Box, Button, Grid, TextField, Typography} from '@mui/material';
 import FileInput from '../../components/UI/FileInput.tsx';
-import { useAppDispatch } from '../../../App/hooks';
 import { addCocktail } from './coctailsThunks';
+import { useAppDispatch } from '../../../App/hooks';
 
 const CocktailsForm = () => {
     const navigate = useNavigate();
@@ -20,21 +20,27 @@ const CocktailsForm = () => {
         }],
     });
 
-    useEffect(() => {
-        const fetchUrl = async () => {
-            await dispatch(addCocktail(state));
-        };
-
-        void fetchUrl();
-    }, []);
 
     const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
+        const nameParts = name.split('-');
 
-        setState((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }));
+        if (nameParts.length === 2) {
+            const [field, index] = nameParts;
+            const updatedIngredients = [...state.ingredients];
+            updatedIngredients[parseInt(index)][field] = value;
+
+            setState((prevState) => ({
+                ...prevState,
+                ingredients: updatedIngredients,
+            }));
+            console.log(state)
+        } else {
+            setState((prevState) => ({
+                ...prevState,
+                [name]: value,
+            }));
+        }
     };
 
     const fileInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,10 +52,9 @@ const CocktailsForm = () => {
         }
     };
 
-
     const formSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
+        dispatch(addCocktail(state));
         navigate('/');
     };
 

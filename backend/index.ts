@@ -3,7 +3,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import config from './config';
 import usersRouter from './routes/users';
-import cocktailsRouter from "./routers/cocktails";
+import cocktailsRouter from './routes/coctails';
 
 const app = express();
 const port = 8000;
